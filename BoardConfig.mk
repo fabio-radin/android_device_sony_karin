@@ -18,14 +18,11 @@ include device/sony/karin_windy/BoardConfigCommon.mk
 
 DEVICE_PATH := device/sony/karin
 
-# Use Snapdragon LLVM, if available
-TARGET_USE_SDCLANG := true
-
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Radio
-TARGET_HAVE_RADIO := true
+BOARD_HAVE_RADIO := true
 
 # Security Patch Level
 VENDOR_SECURITY_PATCH := 2017-09-01

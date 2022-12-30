@@ -14,15 +14,35 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/sony/karin/full_karin.mk)
+
+# Inherit from karin-common device
+$(call inherit-product, device/sony/karin/device.mk)
+
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
 # Inherit some common LineageOS stuff
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
+# This indicates the first api level, device has been commercially launched on.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l_mr1.mk)
+
+# Add karin specific permissions
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
+
+# Set those variables here to overwrite the inherited values.
+PRODUCT_BRAND := Sony
 PRODUCT_NAME := lineage_karin
+PRODUCT_MANUFACTURER := Sony
+PRODUCT_DEVICE := karin
+PRODUCT_MODEL := Xperia Z4 Tablet
 
 # Use the latest approved GMS identifiers
 PRODUCT_BUILD_PROP_OVERRIDES += \
-  PRODUCT_NAME=karin \
-  BUILD_FINGERPRINT=Sony/karin/karin:7.1.1/N-MR1-KITAKAMI-170920-0229/1:user/dev-keys \
-  PRIVATE_BUILD_DESC="karin-user 7.1.1 N-MR1-KITAKAMI-170920-0229 1 dev-keys"
+    PRIVATE_BUILD_DESC="SGP771-user 7.1.1 32.4.A.1.54-219395100 release-keys"
+
+BUILD_FINGERPRINT := Sony/SGP771/SGP771:7.1.1/32.4.A.1.54/219395100:user/release-keys
+

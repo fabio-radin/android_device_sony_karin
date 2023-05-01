@@ -1,5 +1,6 @@
 #
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright 2015 The Android Open Source Project
+# Copyright (C) 2016-2021 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,27 +15,7 @@
 # limitations under the License.
 #
 
-include device/sony/karin_windy/BoardConfigCommon.mk
+add_lunch_combo omni_karin-eng
+add_lunch_combo omni_karin-userdebug
+export ALLOW_MISSING_DEPENDENCIES=true
 
-DEVICE_PATH := device/sony/karin
-
-# Properties
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-
-# Radio
-BOARD_HAVE_RADIO := true
-
-# Security Patch Level
-VENDOR_SECURITY_PATCH := 2017-09-01
-
-# Assert
-TARGET_OTA_ASSERT_DEVICE := SGP771,karin
-
-# Boot image/kernel
-TARGET_KERNEL_CONFIG := kitakami_karin_defconfig
-
-# Wifi
-WIFI_BUS := PCIE
-
-# Inherit from the proprietary version
--include vendor/sony/karin/BoardConfigVendor.mk
